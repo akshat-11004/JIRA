@@ -1,3 +1,9 @@
+from pathlib import Path
+import sys
+
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+
 from calculator import add
 
 def test_positive_numbers():
