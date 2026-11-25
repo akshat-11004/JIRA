@@ -3,7 +3,7 @@ name: Code Quality and Tests
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    branches: [main]
+    branches: [master]
 
 permissions:
   contents: read

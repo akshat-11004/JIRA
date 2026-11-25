@@ -9,7 +9,7 @@ on:
       - edited
       - ready_for_review
     branches:
-      - main
+      - master
 
 concurrency:
   group: ai-review-${{ github.event.pull_request.number }}
