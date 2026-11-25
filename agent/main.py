@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-from github_client import GitHubClient
+from agent.github_client import GitHubClient
 
 
 def generate_feedback(result):
