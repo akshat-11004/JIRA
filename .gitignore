@@ -5,6 +5,7 @@
 *.pem
 *.key
 
+*chache*
 
 # Common Build & Dependency Folders
 node_modules/
