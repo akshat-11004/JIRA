@@ -7,6 +7,7 @@ from agent.jira_client import JiraClient, identify_ticket
 from agent.reviewer import AIReviewer
 from agent.schemas import ReviewResult
 
+
 class AgentState(TypedDict, total=False):
 
     pr_number: int
