@@ -1,6 +1,6 @@
+import json
 import os
 import sys
-import json
 
 from github_client import GitHubClient
 
@@ -43,8 +43,10 @@ def generate_feedback(result):
 
         lines.extend([
             "",
-            f"{symbols[requirement.status]} "
-            f"**{requirement.requirement}**",
+            (
+                f"{symbols[requirement.status]} "
+                f"**{requirement.requirement}**"
+            ),
             f"- Status: {requirement.status}",
             f"- Evidence: {requirement.evidence}",
             f"- Suggestion: {requirement.suggestion}"
@@ -158,7 +160,9 @@ def main():
 
         sys.exit(0 if approved else 1)
 
-    except Exception as error:
+    # This is the application boundary: any unanticipated failure must block
+    # the CI gate and be reported to GitHub without exposing response details.
+    except Exception as error:  # noqa: BLE001
 
         # Avoid printing potentially sensitive
         # API response content into CI logs.
@@ -185,7 +189,7 @@ def main():
                 event="COMMENT",
                 commit_sha=sha
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             print("Unable to post failure feedback.")
 
         sys.exit(1)

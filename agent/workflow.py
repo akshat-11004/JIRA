@@ -1,17 +1,8 @@
 from typing import TypedDict
 
-from langgraph.graph import (
-    StateGraph,
-    START,
-    END
-)
-
 from github_client import GitHubClient
-from jira_client import (
-    JiraClient,
-    identify_ticket
-)
-
+from jira_client import JiraClient, identify_ticket
+from langgraph.graph import END, START, StateGraph
 from reviewer import AIReviewer
 from schemas import ReviewResult
 

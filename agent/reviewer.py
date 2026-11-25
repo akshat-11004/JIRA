@@ -1,15 +1,11 @@
-import os
 import json
+import os
 
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
 
-from langchain_core.messages import (
-    SystemMessage,
-    HumanMessage
-)
-
-from agent.schemas import ReviewResult
 from agent.prompts import REVIEW_SYSTEM_PROMPT
+from agent.schemas import ReviewResult
 
 
 class AIReviewer:
