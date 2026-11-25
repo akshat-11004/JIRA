@@ -1,10 +1,10 @@
 from typing import TypedDict
 
-from github_client import GitHubClient
-from jira_client import JiraClient, identify_ticket
+from agent.github_client import GitHubClient
+from agent.jira_client import JiraClient, identify_ticket
 from langgraph.graph import END, START, StateGraph
-from reviewer import AIReviewer
-from schemas import ReviewResult
+from agent.reviewer import AIReviewer
+from agent.schemas import ReviewResult
 
 
 class AgentState(TypedDict, total=False):
