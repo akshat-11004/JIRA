@@ -62,22 +62,29 @@ class AIReviewer:
             )
         ]
 
-        response = self.reviewer.invoke(messages)
+        for attempt in range(3):
+            response = self.reviewer.invoke(messages)
 
-        usage = response["raw"].usage_metadata
+            usage = response["raw"].usage_metadata
 
-        print("Token usage:", usage)
+            print(f"Review attempt: {attempt + 1}")
+            print("Token usage:", usage)
 
-        if response["parsing_error"]:
-            raise ValueError(
-                "LLM returned an invalid review."
+            parsing_error = response.get("parsing_error")
+            result = response.get("parsed")
+
+            if parsing_error is None and result is not None:
+                print("Structured review generated successfully")
+                return result
+
+            print(
+                "Structured output validation failed:",
+                type(parsing_error).__name__
+                if parsing_error
+                else "Empty parsed response"
             )
 
-        result = response["parsed"]
-
-        if result is None:
-            raise ValueError(
-                "LLM did not return a valid review."
-            )
-
-        return result
+        raise ValueError(
+            "LLM failed to generate a valid structured "
+            "review after 3 attempts."
+        )
