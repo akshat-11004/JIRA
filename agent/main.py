@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import traceback
 
 from agent.github_client import GitHubClient
 
@@ -166,9 +167,14 @@ def main():
 
         # Avoid printing potentially sensitive
         # API response content into CI logs.
-        print(
-            f"Review failed: {type(error).__name__}"
-        )
+        print(f"Review failed: {type(error).__name__}")
+
+        for frame in traceback.extract_tb(error.__traceback__):
+            print(
+                f"File: {frame.filename}, "
+                f"Line: {frame.lineno}, "
+                f"Function: {frame.name}"
+            )
 
         github.set_status(
             sha,
